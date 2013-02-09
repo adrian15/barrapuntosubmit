@@ -7,6 +7,17 @@
 <title>Barrapunto Submissions</title>
 <script>
 <!--
+function story_general_news() {
+    (document.getElementsByName('story'))[0].value = 
+       (document.getElementsByName('story-when'))[0].value
+       + " "
+       + (document.getElementsByName('story-where'))[0].value
+       + " "
+       + (document.getElementsByName('base-story'))[0].value
+       + " "
+       + (document.getElementsByName('story-more'))[0].value
+    ;
+}
 function story_copy_asis() {
     (document.getElementsByName('story'))[0].value = (document.getElementsByName('base-story'))[0].value;
 }
@@ -277,10 +288,28 @@ Por lo general, hay que usar la secci&oacute;n Portada
 </div>
 			<p>
 <label >
-	Escribe aqui tu historia <b></b>
+	Cuando ocurre la historia<p><i>(Ej: El pr&oacute;ximo 15 de febrero)</i>
+</label>
+ </p>
+			<textarea wrap="virtual" rows="1" cols="50" name="story-when"></textarea><br>
+			<p>
+<label >
+	D&oacute;nde ocurre la historia<p><i>(Ej: en el palacio de los congresos)</i>
+</label>
+ </p>
+			<textarea wrap="virtual" rows="1" cols="50" name="story-where"></textarea><br>
+			<p>
+<label >
+	Escribe aqui tu historia
 </label>
  </p>
 			<textarea wrap="virtual" rows="12" cols="50" name="base-story"></textarea><br>
+			<p>
+<label >
+	Como encontrar m&aacute;s informaci&oacute;n<p><i>(Ej: consulte la web evento.com)</i>
+</label>
+ </p>
+			<textarea wrap="virtual" rows="3" cols="50" name="story-more"></textarea><br>
 			<p>
 <label >
 	Tu historia <b>procesada</b>
@@ -311,7 +340,7 @@ Nos encanta el HTML, pero por favor, pon bien las etiquetas y las URLs que uses
 
 
 			
-			<p><button type="button" name="process-button" onclick="story_copy_asis();">PROCESAR</button><p><input type="submit" name="op" value="Previsualizar" class="button">
+			<p><button type="button" name="process-button" onclick="story_general_news();">PROCESAR</button><p><input type="submit" name="op" value="Previsualizar" class="button">
 		
 			<div class="note">
 Debes previsualizar una vez, poner un t&iacute;tulo, algo de texto y un tema, antes de enviarlo
