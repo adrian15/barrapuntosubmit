@@ -6,7 +6,46 @@
 
 <title>Barrapunto Submissions</title>
 <script>
+
+
 <!--
+function story_has_changed() {
+
+
+    var storyType = document.getElementById('storyType');
+    if (storyType) {
+      // TODO: Function to hide by default all the extra forms
+      document.getElementById("story-when-form").style.display = 'none';
+      document.getElementById("story-where-form").style.display = 'none';
+      document.getElementById("story-more-form").style.display = 'none';
+      document.getElementById("base-story-form").style.display = 'none';
+      document.getElementById("process-button").style.display = 'none';
+
+      // Evaluate story type
+      if ((storyType.options[storyType.selectedIndex].value) == "general") {
+	// Show only general extra forms
+	document.getElementById("story-when-form").style.display = '';
+	document.getElementById("story-where-form").style.display = '';
+	document.getElementById("story-more-form").style.display = '';
+        document.getElementById("base-story-form").style.display = '';
+        document.getElementById("process-button").style.display = '';
+      } else {
+	// Nothing actually
+      }
+      
+      
+    }
+
+    (document.getElementsByName('story'))[0].value = 
+       (document.getElementsByName('story-when'))[0].value
+       + " "
+       + (document.getElementsByName('story-where'))[0].value
+       + " "
+       + (document.getElementsByName('base-story'))[0].value
+       + " "
+       + (document.getElementsByName('story-more'))[0].value
+    ;
+}
 function story_general_news() {
     (document.getElementsByName('story'))[0].value = 
        (document.getElementsByName('story-when'))[0].value
@@ -24,7 +63,7 @@ function story_copy_asis() {
 -->
 </script>
 </head>
-<body>
+<body onload="story_has_changed()">
 
 <!-- start template: ID 589, displayForm;submit;default -->
 
@@ -287,32 +326,62 @@ Titulos malos=&#39;Mira esto!&#39; o &#39;Un art&iacute;culo&#39;.  Recibimos mu
 Por lo general, hay que usar la secci&oacute;n Portada
 </div>
 			<p>
-<label >
-	Cuando ocurre la historia<p><i>(Ej: El pr&oacute;ximo 15 de febrero)</i>
-</label>
+Por favor selecciona el tipo de noticia que quieres enviar para que se te asista en la redacción de la misma.
+  <p>
+    <select onchange = "story_has_changed()" id="storyType">
+      <option selected="selected" value ="general">Noticia general</option>
+      <option value ="libre">Libre</option>
+    </select>
+  </p>
  </p>
-			<textarea wrap="virtual" rows="1" cols="50" name="story-when"></textarea><br>
+<div id="story-when-form" style="display:none">
+  <p>
+    <label>
+    Cuando ocurre la historia
+    <p>
+      <i>(Ej: El pr&oacute;ximo 15 de febrero)</i>
+    </p>
+  </label>
+  </p>
+  <textarea wrap="virtual" rows="1" cols="50" name="story-when"></textarea>
+  <br>
+</div> <!-- id="story-when-form" -->
+
+<div id="story-where-form" style="display:none">
+  <p>
+    <label>
+    D&oacute;nde ocurre la historia
+    <p>
+      <i>(Ej: en el palacio de los congresos)</i>
+    </p>
+  </label>
+  </p>
+  <textarea wrap="virtual" rows="1" cols="50" name="story-where"></textarea>
+  <br>
+</div> <!-- id="story-where-form" -->
+<div id="base-story-form" style="display:none">
 			<p>
 <label >
-	D&oacute;nde ocurre la historia<p><i>(Ej: en el palacio de los congresos)</i>
-</label>
- </p>
-			<textarea wrap="virtual" rows="1" cols="50" name="story-where"></textarea><br>
-			<p>
-<label >
-	Escribe aqui tu historia
+	Escribe aqui tu historia primero y luego pulsa <b>Procesar</b>!!!
 </label>
  </p>
 			<textarea wrap="virtual" rows="12" cols="50" name="base-story"></textarea><br>
+</div> <!-- id="base-story-form" -->
+<div id="story-more-form" style="display:none">
+  <p>
+    <label>
+    Como encontrar m&aacute;s informaci&oacute;n
+    <p>
+      <i>(Ej: consulte la web evento.com)</i>
+    </p>
+  </label>
+  </p>
+  <textarea wrap="virtual" rows="3" cols="50" name="story-more"></textarea>
+  <br>
+</div> <!-- id="story-more-form" -->
 			<p>
 <label >
-	Como encontrar m&aacute;s informaci&oacute;n<p><i>(Ej: consulte la web evento.com)</i>
-</label>
- </p>
-			<textarea wrap="virtual" rows="3" cols="50" name="story-more"></textarea><br>
-			<p>
-<label >
-	Tu historia <b>procesada</b>
+	As&iacute; quedar&aacute; tu historia finalmente.
 </label>
  </p>
 			<textarea wrap="virtual" rows="12" cols="50" name="story"></textarea><br>
@@ -339,8 +408,11 @@ Nos encanta el HTML, pero por favor, pon bien las etiquetas y las URLs que uses
 <!-- end template: ID 447, select;misc;default -->
 
 
-			
-			<p><button type="button" name="process-button" onclick="story_general_news();">PROCESAR</button><p><input type="submit" name="op" value="Previsualizar" class="button">
+<div id="process-button" style="display:none">			
+  <p><button type="button" name="process-button" onclick="story_general_news();">PROCESAR</button><p></p>
+</div> <!-- id="process-button" -->
+
+<input type="submit" name="op" value="Previsualizar" class="button">
 		
 			<div class="note">
 Debes previsualizar una vez, poner un t&iacute;tulo, algo de texto y un tema, antes de enviarlo
