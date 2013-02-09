@@ -20,6 +20,8 @@ function story_has_changed() {
       document.getElementById("story-more-form").style.display = 'none';
       document.getElementById("base-story-form").style.display = 'none';
       document.getElementById("process-button").style.display = 'none';
+      document.getElementById("story-about-general-form").style.display = 'none';
+      document.getElementById("story-about-specific-form").style.display = 'none';
 
       // Evaluate story type
       if ((storyType.options[storyType.selectedIndex].value) == "general") {
@@ -29,6 +31,14 @@ function story_has_changed() {
 	document.getElementById("story-more-form").style.display = '';
         document.getElementById("base-story-form").style.display = '';
         document.getElementById("process-button").style.display = '';
+      } else if ((storyType.options[storyType.selectedIndex].value) == "evento") {
+	document.getElementById("story-when-form").style.display = '';
+	document.getElementById("story-where-form").style.display = '';
+	document.getElementById("story-more-form").style.display = '';
+        document.getElementById("base-story-form").style.display = '';
+        document.getElementById("process-button").style.display = '';
+        document.getElementById("story-about-general-form").style.display = '';
+        document.getElementById("story-about-specific-form").style.display = '';
       } else {
 	// Nothing actually
       }
@@ -330,6 +340,7 @@ Por favor selecciona el tipo de noticia que quieres enviar para que se te asista
   <p>
     <select onchange = "story_has_changed()" id="storyType">
       <option selected="selected" value ="general">Noticia general</option>
+      <option value ="evento">Evento</option>
       <option value ="libre">Libre</option>
     </select>
   </p>
@@ -359,6 +370,30 @@ Por favor selecciona el tipo de noticia que quieres enviar para que se te asista
   <textarea wrap="virtual" rows="1" cols="50" name="story-where"></textarea>
   <br>
 </div> <!-- id="story-where-form" -->
+<div id="story-about-general-form" style="display:none">
+  <p>
+    <label>
+    De qu&eacute; va el evento / noticia en general
+    <p>
+      <i>(Ej: sobre Python)</i>
+    </p>
+  </label>
+  </p>
+  <textarea wrap="virtual" rows="1" cols="50" name="story-about-general"></textarea>
+  <br>
+</div> <!-- id="story-about-general-form" -->
+<div id="story-about-specific-form" style="display:none">
+  <p>
+    <label>
+    De qu&eacute; va el evento / noticia en espec&iacute;fico en esta edici&oacute;n
+    <p>
+      <i>(Ej: esta edici&oacute;n versa sobre los iteradores)</i>
+    </p>
+  </label>
+  </p>
+  <textarea wrap="virtual" rows="1" cols="50" name="story-about-specific"></textarea>
+  <br>
+</div> <!-- id="story-about-specific-form" -->
 <div id="base-story-form" style="display:none">
 			<p>
 <label >
